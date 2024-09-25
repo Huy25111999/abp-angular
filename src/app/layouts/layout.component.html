@@ -1,0 +1,95 @@
+<div class="sidebar" [ngClass]="{ close: isCollapsed }">
+  <div class="logo-details">
+    <i class="bx bxl-c-plus-plus"></i>
+    <span class="logo_name">Inspol.OnlineV2</span>
+  </div>
+  <ul class="nav-links">
+    <li
+      *ngFor="let menuItem of menuItems"
+      [ngClass]="{
+      'menu-item-hover': currentRoute === roleCurrent +  menuItem.link ,
+      'active': currentRoute === roleCurrent + menuItem.link,
+    }"
+    >
+      <a href="" *ngIf="!hasItems(menuItem)" [routerLink]="roleCurrent + menuItem.link">
+        <i
+          class="bi truncateLabel oi {{ menuItem?.icon }}"
+          style="font-size: 30px; margin-right: 16px"
+        ></i>
+        <span class="link_name">{{ menuItem.label }}</span>
+      </a>
+
+      <ng-container *ngIf="hasItems(menuItem)">
+        <div class="iocn-link">
+          <a>
+            <i class="bx bx-collection"></i>
+            <span class="link_name">{{ menuItem.label }}</span>
+          </a>
+          <i class="bx bxs-chevron-down arrow"></i>
+        </div>
+      </ng-container>
+
+      <ul *ngIf="hasItems(menuItem)" class="sub-menu">
+        <li
+          *ngFor="let subitem of menuItem.subItems"
+          class="menu-12"
+          [ngClass]="{
+          'menu-item-hover': currentRoute === roleCurrent + menuItem.link,
+          'active': currentRoute === roleCurrent + menuItem.link,
+        }"
+        >
+          <a
+            href=""
+            *ngIf="!hasItems(subitem)"
+            [routerLink]="roleCurrent + subitem.link"
+            [attr.data-parent]="subitem.parentId"
+            [ngClass]="{ 'menu-item-hover': currentRoute === roleCurrent + subitem.link }"
+          >
+            <i class="bi truncateLabel oi {{ subitem?.icon }}"></i>
+            <span class="link_name">{{ subitem.label }}</span>
+          </a>
+
+          <a
+            *ngIf="hasItems(subitem)"
+            class="side-nav-link-a-ref has-arrow truncateSubItem"
+            href="javascript:void(0);"
+            ngbTooltip="{{ subitem.label }}"
+            placement="right"
+            container="body"
+            [attr.data-parent]="subitem.parentId"
+          >
+            {{ subitem.label }}
+          </a>
+        </li>
+      </ul>
+    </li>
+
+    <li>
+      <div class="profile-details">
+        <div class="profile-content">
+          <!-- <img src="image/profile.jpg" alt="profileImg" /> -->
+        </div>
+        <div class="name-job">
+          <div class="profile_name">Developed by Wiztech</div>
+          <div class="job">Version xxxx</div>
+        </div>
+        <!-- <i class="bx bx-log-out"></i> -->
+      </div>
+    </li>
+  </ul>
+
+  <!-- <app-sidebar></app-sidebar> -->
+</div>
+<section class="home-section">
+  <div class="home-content top-row">
+    <div class="header d-flex justify-content-between w-100">
+      <i class="bx bx-menu" (click)="toggleSubMenu()"></i>
+      <div class="header-right">
+        <app-header></app-header>
+      </div>
+    </div>
+  </div>
+  <article class="content px-4" style="background-color: #e4e9f7">
+    <router-outlet></router-outlet>
+  </article>
+</section>

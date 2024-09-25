@@ -1,0 +1,130 @@
+<!-- <div class="wrap">
+  <div class="box mx-auto">
+    <div class="image">
+      <img src="./assets/images/logo/banner-logo.png" alt="Baner" />
+    </div>
+    <div class="form">
+      <div class="logo">
+        <img
+          routerLink="/landing-page"
+          style="cursor: pointer"
+          src="/assets/images/logo/logo.jpg"
+          alt="inspol"
+        />
+      </div>
+      <h2 class="large-title text-center mt-20">
+        {{ 'Get Log In Code' }}
+      </h2>
+      <form
+        (ngSubmit)="onSubmit($event)"
+        [formGroup]="formData"
+        class="form"
+        nzLayout="vertical"
+        skipValidation
+      >
+        <div class="me-n7 pe-7" data-kt-scroll="true">
+          <span
+            >A code has been sent to your registered email. Please check your mailbox them paster
+            the code here to verify your login</span
+          >
+          <div class="fv-row mb-7 mt-3">
+            <label class="required fs-6 fw-semibold mb-2">Log In Code</label>
+            <input
+              type="text"
+              formControlName="code"
+              class="form-control form-control-solid"
+              placeholder="Key your code here"
+              name="code"
+            />
+            <app-error-messages [control]="formData.controls['code']" controlName="Code">
+            </app-error-messages>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-6">
+            <label class="title">
+              <span (click)="generateCode()">{{ 'Get code again?' }}</span>
+            </label>
+          </div>
+          <div class="col-md-6" style="text-align: right">
+            <a class="forgot_password title" (click)="openModalContactSupport()">
+              {{ 'Account Support' }}
+            </a>
+          </div>
+        </div>
+
+        <div class="mt-2" *ngIf="codeGenerated">
+          <div class="d-flex justify-content-center">
+            <input type="text" class="mw-sm-25" readonly value="{{ code.slice(0, 2) }}" />
+            <input type="text" class="mw-sm-25" readonly value="{{ code.slice(2, 4) }}" />
+            <input type="text" class="mw-sm-25" readonly value="{{ code.slice(4, 6) }}" />
+          </div>
+        </div>
+        <button
+          type="submit"
+          class="btn btn-primary title btn-common mx-auto d-flex justify-content-center mt-2"
+        >
+          Verify
+        </button>
+      </form>
+    </div>
+  </div>
+</div> -->
+
+<h2 class="large-title text-center mt-20">
+  {{ 'Get Log In Code' }}
+</h2>
+<form
+  (ngSubmit)="onSubmit($event)"
+  [formGroup]="formData"
+  class="form"
+  nzLayout="vertical"
+  skipValidation
+>
+  <div class="me-n7 pe-7" data-kt-scroll="true">
+    <span
+      >A code has been sent to your registered email. Please check your mailbox them paster the code
+      here to verify your login</span
+    >
+    <div class="fv-row mb-7 mt-3">
+      <label class="required fs-6 fw-semibold mb-2">Log In Code</label>
+      <input
+        type="text"
+        formControlName="code"
+        class="form-control form-control-solid"
+        placeholder="Key your code here"
+        name="code"
+      />
+      <app-error-messages [control]="formData.controls['code']" controlName="Code">
+      </app-error-messages>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-6">
+      <label class="title">
+        <span (click)="generateCode()">{{ 'Get code again?' }}</span>
+      </label>
+    </div>
+    <div class="col-md-6" style="text-align: right">
+      <a class="forgot_password title" (click)="openModalContactSupport()">
+        {{ 'Account Support' }}
+      </a>
+    </div>
+  </div>
+
+  <div class="mt-2" *ngIf="codeGenerated">
+    <div class="d-flex justify-content-center">
+      <input type="text" class="mw-sm-25" readonly value="{{ code.slice(0, 2) }}" />
+      <input type="text" class="mw-sm-25" readonly value="{{ code.slice(2, 4) }}" />
+      <input type="text" class="mw-sm-25" readonly value="{{ code.slice(4, 6) }}" />
+    </div>
+  </div>
+  <button
+    type="submit"
+    class="btn btn-primary title btn-common mx-auto d-flex justify-content-center mt-2"
+  >
+    Verify
+  </button>
+</form>

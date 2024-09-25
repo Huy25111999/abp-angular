@@ -1,0 +1,170 @@
+<div style>
+  <ng-container *ngIf="control && control.invalid && (control.dirty || control.touched)">
+    <div [ngSwitch]="getFirstKeyError">
+      <ng-container *ngSwitchCase="'required'">
+        <span class="text-danger invalid">
+          {{ controlName }} {{ '::required' | abpLocalization : { field: controlName } }}
+        </span>
+      </ng-container>
+
+      <ng-container *ngSwitchCase="'pattern'">
+        <span class="text-danger" *ngIf="showErrorPattern">
+          <ng-container *ngIf="customMessagePattern; else messagePatternNormal">
+            {{ customMessagePattern }}
+          </ng-container>
+
+          <ng-template #messagePatternNormal>
+            {{ controlName }}
+            {{ 'không đúng định dạng' | abpLocalization : { field: controlName } }}
+          </ng-template>
+        </span>
+        <span class="text-danger" *ngIf="showErrorLng">
+          {{ 'message.lng' | translate : { field: controlName } }}
+        </span>
+        <span class="text-danger" *ngIf="showErrorLat">
+          {{ 'message.lat' | translate : { field: controlName } }}
+        </span>
+        <span class="text-danger" *ngIf="showErrorPhone">
+          {{ '::required' | abpLocalization : { field: controlName } }}
+        </span>
+        <span class="text-danger" *ngIf="showErrorUsername">
+          {{ 'message.username' | translate : { field: controlName } }}
+        </span>
+        <span class="text-danger" *ngIf="showErrorHotline">
+          {{ 'message.hotline' | translate : { field: controlName } }}
+        </span>
+        <span class="text-danger" *ngIf="showErrorLandline">
+          {{ 'message.landline' | translate : { field: controlName, codeArea: codeArea } }}
+        </span>
+        <span class="text-danger" *ngIf="showPatternErrName === 'password_invalid'">
+          {{ 'message.password_invalid' | translate }}
+        </span>
+      </ng-container>
+      <!-- <ng-container *ngSwitchCase="'maxlength'">
+        <span class="text-danger">
+          max length...
+        </span>
+      </ng-container> -->
+      <ng-container *ngSwitchCase="'minlength'">
+        <!-- Do đã rất nhiều chỗ sử dụng @Input() value để validate maxlength-->
+        <span class="text-danger" *ngIf="feature === 'edit-config'; else normal">
+          {{ 'message.min_length' | translate : { field: controlName, value: minValue } }}
+        </span>
+
+        <ng-template #normal>
+          <span class="text-danger">
+            {{ 'message.min_length' | translate : { field: controlName, value: value } }}
+          </span>
+        </ng-template>
+      </ng-container>
+      <ng-container *ngSwitchCase="'passwordEasy'">
+        <span class="text-danger">
+          {{ 'message.password_easy' | translate }}
+        </span>
+      </ng-container>
+      <ng-container *ngSwitchCase="'notSame'">
+        <span class="text-danger">
+          {{ 'message.same_old_password' | translate }}
+        </span>
+      </ng-container>
+      <ng-container *ngSwitchCase="'confirmedValidator'">
+        <span class="text-danger">
+          {{ 'message.confirm_password_not_same' | translate }}
+        </span>
+      </ng-container>
+      <ng-container *ngSwitchCase="'maxlength'">
+        <span class="text-danger">
+          {{ 'message.max_length' | translate : { field: controlName, value: maxLength } }}
+        </span>
+      </ng-container>
+      <ng-container *ngSwitchCase="'min'">
+        <span class="text-danger">
+          <!-- {{controlName}} không được phép nhỏ hơn {{remnantControlName}} -->
+          {{ 'message.min' | translate : { field: controlName, value: minValue } }}
+        </span>
+      </ng-container>
+      <ng-container *ngSwitchCase="'max'">
+        <span class="text-danger">
+          <!-- {{controlName}} không được phép lớn hơn {{remnantControlName}} -->
+          {{ 'message.max' | translate : { field: controlName, value: value } }}
+        </span>
+      </ng-container>
+      <ng-container *ngSwitchCase="'maxTwo'">
+        <span class="text-danger">
+          <!-- {{controlName}} không được phép nhỏ hơn {{remnantControlName}} -->
+          {{ 'message.min' | translate : { field: controlName, value: remnantControlName } }}
+        </span>
+      </ng-container>
+      <ng-container *ngSwitchCase="'minTwo'">
+        <span class="text-danger">
+          <!-- {{controlName}} không được phép lớn hơn {{remnantControlName}} -->
+          {{ 'message.max' | translate : { field: controlName, value: remnantControlName } }}
+        </span>
+      </ng-container>
+      <ng-container *ngSwitchCase="'timeMin'">
+        <span class="text-danger">
+          <!-- {{controlName}} không được phép lớn hơn {{remnantControlName}} -->
+          {{ 'message.min' | translate : { field: controlName, value: remnantControlName } }}
+        </span>
+      </ng-container>
+      <ng-container *ngSwitchCase="'timeMax'">
+        <span class="text-danger">
+          <!-- {{controlName}} không được phép lớn hơn {{remnantControlName}} -->
+          {{ 'message.max' | translate : { field: controlName, value: remnantControlName } }}
+        </span>
+      </ng-container>
+      <ng-container *ngSwitchCase="'duplicateUsername'">
+        <span class="text-danger">
+          {{ 'message.duplicate_username' | translate }}
+        </span>
+      </ng-container>
+      <ng-container *ngSwitchCase="'duplicateEmail'">
+        <span class="text-danger">
+          {{ 'message.duplicate_email' | translate }}
+        </span>
+      </ng-container>
+      <ng-container *ngSwitchCase="'duplicatePhone'">
+        <span class="text-danger">
+          {{ 'message.duplicate_phone' | translate }}
+        </span>
+      </ng-container>
+      <ng-container *ngSwitchCase="'defaultLengthLessThanMinLength'">
+        <span class="text-danger">
+          {{ 'message.default_length_not_less_than_min_length' | translate }}
+        </span>
+      </ng-container>
+      <ng-container *ngSwitchCase="'defaultLengthMoreThanMaxLength'">
+        <span class="text-danger">
+          {{ 'message.default_length_not_more_than_max_length' | translate }}
+        </span>
+      </ng-container>
+      <ng-container *ngSwitchCase="'defaultValueLessThanMinValue'">
+        <span class="text-danger">
+          {{ 'message.default_value_not_less_than_min_value' | translate }}
+        </span>
+      </ng-container>
+      <ng-container *ngSwitchCase="'defaultValueMoreThanMaxValue'">
+        <span class="text-danger">
+          {{ 'message.default_value_not_more_than_max_value' | translate }}
+        </span>
+      </ng-container>
+      <ng-container *ngSwitchCase="'rangeDate'">
+        <span class="text-danger">
+          {{ 'message.search_time_no_more_than_7_day' | translate }}
+        </span>
+      </ng-container>
+
+      <ng-container *ngSwitchCase="'numberOnly'">
+        <span class="text-danger">
+          {{ 'message.number_only' | translate : { field: controlName } }}
+        </span>
+      </ng-container>
+
+      <ng-container *ngSwitchDefault>
+        <span class="text-danger">
+          {{control.errors?.['messageCustom'] | translate}}
+        </span>
+      </ng-container>
+    </div>
+  </ng-container>
+</div>

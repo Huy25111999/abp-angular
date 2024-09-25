@@ -1,0 +1,190 @@
+<div class="modal-container">
+  <form action="" class="form" (ngSubmit)="onSave($event)" [formGroup]="formData" skipValidation="">
+    <div class="modal-header">
+      <h2 class="fw-bold">Contact</h2>
+      <div class="btn btn-icon btn-sm btn-active-icon-primary">
+        <button class="btn-close" type="button" (click)="closeModal()"></button>
+      </div>
+    </div>
+    <div class="modal-body py-10 px-lg-17">
+      <div class="me-n7 pe-7">
+        <div class="fv-row row mb-7">
+          <label class="required fs-4 fw-semibold mb-2 col-sm-3">Phone</label>
+          <div class="col-sm-1"></div>
+          <div class="col-sm-8 fv-row">
+            <input
+              type="text"
+              class="form-control form-control-solid fs-8 col-sm-8"
+              placeholder=""
+              name="phone"
+              maxlength="200"
+              trim
+              formControlName="phone"
+              [ngClass]="{
+                'input-error': f.phone.invalid && (f.phone.dirty || f.phone.touched)
+              }"
+            />
+            <app-error-messages
+              [control]="formData.controls['phone']"
+              [controlName]="'Phone' | abpLocalization"
+            ></app-error-messages>
+          </div>
+        </div>
+        <div class="fv-row row mb-7">
+          <label class="required fs-4 fw-semibold mb-2 col-sm-3">Email</label>
+          <div class="col-sm-1"></div>
+          <div class="col-sm-8 fv-row">
+            <input
+              type="text"
+              class="form-control form-control-solid fs-8 col-sm-8"
+              placeholder=""
+              name="email"
+              maxlength="200"
+              trim
+              formControlName="email"
+              [ngClass]="{
+                'input-error': f.email.invalid && (f.email.dirty || f.email.touched)
+              }"
+            />
+            <app-error-messages
+              [control]="formData.controls['email']"
+              [controlName]="'Email' | abpLocalization"
+            ></app-error-messages>
+          </div>
+        </div>
+        <div class="fv-row row mb-7">
+          <label class="required fs-4 fw-semibold mb-2 col-sm-3">Issue</label>
+          <div class="col-sm-1"></div>
+          <div class="col-sm-8 fv-row">
+            <!-- <input
+              type="text"
+              class="form-control form-control-solid fs-8 col-sm-8"
+              placeholder=""
+              name="issue"
+              maxlength="200"
+              trim
+              formControlName="issue"
+              [ngClass]="{
+                'input-error': f.issue.invalid && (f.issue.dirty || f.issue.touched)
+              }"
+            /> -->
+            <ng-select
+              [items]="listIssue"
+              formControlName="issue"
+              bindLabel="name"
+              bindValue="value"
+              [searchFn]="customSearchFn"
+              clearAllText="Clear"
+              placeholder=""
+              [notFoundText]="'Không có bản ghi'"
+              [(ngModel)]="defaultValue"
+              [ngClass]="{
+                'input-error': f.issue.invalid && (f.issue.dirty || f.issue.touched)
+              }"
+            >
+              <ng-template ng-option-tmp let-item="item" let-search="searchTerm" let-index="index">
+                <span>{{ item.name }}</span>
+              </ng-template>
+            </ng-select>
+
+            <app-error-messages
+              [control]="formData.controls['issue']"
+              [controlName]="'Issue' | abpLocalization"
+            ></app-error-messages>
+          </div>
+        </div>
+
+        <ng-container *ngIf="f.issue.value === 0">
+          <div class="fv-row row mb-7">
+            <label class="required fs-4 fw-semibold mb-2 col-sm-3">Other</label>
+            <div class="col-sm-1"></div>
+            <div class="col-sm-8 fv-row">
+              <div class="d-flex flex-column mb-10 fv-row">
+                <label class="fs-6 fw-semibold mb-2">Message</label>
+                <textarea
+                  class="form-control form-control-solid"
+                  rows="4"
+                  name="message"
+                  placeholder=""
+                  formControlName="other"
+                ></textarea>
+              </div>
+              <app-error-messages
+                [control]="formData.controls['other']"
+                [controlName]="'Other' | abpLocalization"
+              ></app-error-messages>
+            </div>
+          </div>
+        </ng-container>
+
+        <ng-container *ngIf="f.issue.value === 1">
+          <div class="fv-row row mb-7">
+            <label class="required fs-4 fw-semibold mb-2 col-sm-3">UsserID</label>
+            <div class="col-sm-1"></div>
+            <div class="col-sm-8 fv-row">
+              <input
+                type="text"
+                class="form-control form-control-solid fs-8 col-sm-8"
+                placeholder=""
+                name="email"
+                maxlength="200"
+                trim
+                formControlName="email"
+                [ngClass]="{
+                  'input-error': f.email.invalid && (f.email.dirty || f.email.touched)
+                }"
+              />
+              <app-error-messages
+                [control]="formData.controls['email']"
+                [controlName]="'UserID' | abpLocalization"
+              ></app-error-messages>
+            </div>
+          </div>
+        </ng-container>
+
+        <ng-container *ngIf="f.issue.value === 2">
+          <div class="fv-row row mb-7">
+            <label class="required fs-4 fw-semibold mb-2 col-sm-3">Phone</label>
+            <div class="col-sm-1"></div>
+            <div class="col-sm-8 fv-row">
+              <input
+                type="text"
+                class="form-control form-control-solid fs-8 col-sm-8"
+                placeholder=""
+                name="phone"
+                maxlength="200"
+                trim
+                formControlName="phone"
+                [ngClass]="{
+                  'input-error': f.phone.invalid && (f.phone.dirty || f.phone.touched)
+                }"
+              />
+              <app-error-messages
+                [control]="formData.controls['phone']"
+                [controlName]="'Phone' | abpLocalization"
+              ></app-error-messages>
+            </div>
+          </div>
+        </ng-container>
+
+        <div class="fv-row row mb-7">
+          <label class="fs-4 fw-semibold mb-2 col-sm-3"></label>
+          <div class="col-sm-1"></div>
+          <div class="col-sm-8 fv-row">
+            <label class="title mt-2">
+              <input class="form-check-input" type="checkbox" />
+              <span>
+                I agree to the <a href=""> Terms of User</a> and
+                <a href=""> Privacy Policy</a></span
+              >
+            </label>
+
+            <div class="fv-row mt-2">
+              <button type="submit" class="btn btn-light-primary me-3">Send</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>

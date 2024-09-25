@@ -1,0 +1,144 @@
+<div class="wrapper app-content flex-column-fluid">
+  <div class="app-container container-fluid">
+    <div class="card">
+      <div class="card-body py-4">
+        <div class="card-top">
+          <h2>
+            {{ 'Welcome!' }}
+          </h2>
+          <p>You have loged in successfully to Inspol Site Admin.</p>
+          <div class="mb-4">
+            <a href="https://inspol.stg01.wiz.com.sg/" class="btn btn-primary mb-1">
+              Inspol News
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-3">
+          <div class="profile-left mx-10">
+            <div class="profile-left-top">
+              <div class="avatar mx-6">
+                <app-avatar (avatar)="uploadFileImage($event)"></app-avatar>
+              </div>
+
+              <button type="button" class="btn btn-light-primary me-3 my-1 w-100">
+                Change avatar
+              </button>
+              <button type="button" class="btn btn-light-primary me-3 my-1 w-100">
+                Change password
+              </button>
+              <button type="button" class="btn btn-light-primary me-3 my-1 w-100">
+                Edit profile
+              </button>
+            </div>
+            <div class="profile-left-bottom my-3">
+              <h5>System Information</h5>
+              <p>Web site: inspol@wiztech.sg.com</p>
+              <p>Site default by wiztech</p>
+              <h5>Technical Support</h5>
+              <p>Email:admin@www.wiztech.com.vn</p>
+              <p>Phone:19001003</p>
+              <h5>Policy & Privacy</h5>
+              <div class="mb-4">
+                <a href="https://inspol.stg01.wiz.com.sg/" class="btn btn-primary mb-1">
+                  Click to open Policy and Privacy
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-9">
+          <div class="card">
+            <div class="card-body">
+              <h5>Account Information</h5>
+              <form [formGroup]="" skipValidation>
+                <div class="me-n7 pe-7">
+                  <div class="row g-9 mb-7">
+                    <div class="fv-row col-md-6">
+                      <label class="fs-6 fw-semibold mb-2">
+                        <span class="required">User ID</span>
+                      </label>
+                      <input
+                        type="text"
+                        class="form-control form-control-solid"
+                        placeholder=""
+                        maxlength="200"
+                      />
+                    </div>
+
+                    <div class="fv-row col-md-6">
+                      <label class="fs-6 fw-semibold mb-2">
+                        <span class="required">Full Name</span>
+                      </label>
+                      <input
+                        type="text"
+                        class="form-control form-control-solid"
+                        placeholder=""
+                        maxlength="10"
+                      />
+                    </div>
+                  </div>
+
+                  <div class="row g-9 mb-7">
+                    <div class="fv-row col-md-6">
+                      <label class="fs-6 fw-semibold mb-2">
+                        <span class="required">Email</span>
+                      </label>
+                      <input
+                        type="text"
+                        class="form-control form-control-solid"
+                        placeholder=""
+                        maxlength="200"
+                      />
+                    </div>
+
+                    <div class="fv-row col-md-6">
+                      <label class="fs-6 fw-semibold mb-2">
+                        <span class="required">Phone</span>
+                      </label>
+                      <input
+                        type="text"
+                        class="form-control form-control-solid"
+                        placeholder=""
+                        maxlength="10"
+                      />
+                    </div>
+                  </div>
+
+                  <div class="row g-9 mb-7">
+                    <div class="fv-row col-md-6">
+                      <label class="fs-6 fw-semibold mb-2">
+                        <span class="required">Status</span>
+                      </label>
+                      <input
+                        type="text"
+                        class="form-control form-control-solid"
+                        placeholder=""
+                        maxlength="200"
+                      />
+                    </div>
+
+                    <div class="fv-row col-md-6">
+                      <label class="fs-6 fw-semibold mb-2">
+                        <span class="required">Role</span>
+                      </label>
+                      <input
+                        type="text"
+                        class="form-control form-control-solid"
+                        placeholder=""
+                        maxlength="10"
+                      />
+                    </div>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

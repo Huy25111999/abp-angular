@@ -1,0 +1,31 @@
+.wrap {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    .download {
+        margin-top: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding-bottom: 16px;
+        color: #000000;
+        font-weight: bold;
+        i {
+            margin-left: 8px;
+        }
+    }
+    .import-zone {
+        min-height: 100px;
+        margin-top: 20px;
+        margin-bottom: 20px;
+        border: 1px dashed #ced4da !important;
+        background: #fff !important;
+        border-radius: 6px;
+        cursor: pointer;
+        min-width: 600px;
+        margin: 0 auto;
+    }
+}
+.overFileName{
+    color: #000;
+}

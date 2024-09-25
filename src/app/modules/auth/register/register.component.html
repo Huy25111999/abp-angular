@@ -1,0 +1,99 @@
+<div class="wrap">
+  <div class="box mx-auto">
+    <div class="image">
+      <img src="./assets/images/logo/banner-logo.png" alt="Baner" />
+    </div>
+    <div class="form">
+      <div class="logo">
+        <img
+          routerLink="/landing-page"
+          style="cursor: pointer"
+          src="/assets/images/logo/logo.jpg"
+          alt="inspol"
+        />
+      </div>
+      <h2 class="large-title text-center">
+        {{ 'Register' }}
+      </h2>
+      <form
+        (ngSubmit)="onSubmit($event)"
+        [formGroup]="formData"
+        class="form"
+        nzLayout="vertical"
+        skipValidation
+      >
+        <div class="me-n7 pe-7" data-kt-scroll="true">
+          <div class="fv-row mb-7">
+            <label class="required fs-6 fw-semibold mb-2">Email</label>
+            <input
+              type="text"
+              formControlName="email"
+              class="form-control form-control-solid"
+              placeholder=""
+              name="email"
+            />
+            <app-error-messages
+              [control]="formData.controls['email']"
+              controlName="Email"
+            ></app-error-messages>
+          </div>
+          <div class="fv-row mb-7">
+            <label class="fs-6 fw-semibold mb-2">
+              <span class="required">Password</span>
+            </label>
+            <input
+              type="password"
+              formControlName="password"
+              class="form-control form-control-solid"
+              placeholder=""
+              name="password"
+            />
+            <app-error-messages
+              [control]="formData.controls['password']"
+              controlName="Mật khẩu"
+            ></app-error-messages>
+          </div>
+          <div class="fv-row mb-7">
+            <label class="fs-6 fw-semibold mb-2">
+              <span class="required">Contact No</span>
+            </label>
+            <input
+              type="text"
+              formControlName="contact"
+              class="form-control form-control-solid"
+              placeholder=""
+              name="contact"
+            />
+            <app-error-messages
+              [control]="formData.controls['contact']"
+              controlName="Số điện thoại"
+            ></app-error-messages>
+          </div>
+
+          <div class="fv-row mb-7">
+            <label class="fs-6 fw-semibold mb-2">
+              <span class="required">Captcha</span>
+            </label>
+            <ng-otp-input
+              #ngOtpInput
+              formControlName="otp"
+              (onInputChange)="onOtpChange($event)"
+              [config]="config"
+            ></ng-otp-input>
+            <app-error-messages
+              [control]="formData.controls['otp']"
+              controlName="OTP"
+            ></app-error-messages>
+          </div>
+        </div>
+
+        <button
+          type="submit"
+          class="btn btn-primary title btn-common mx-auto d-flex justify-content-center"
+        >
+          Register
+        </button>
+      </form>
+    </div>
+  </div>
+</div>

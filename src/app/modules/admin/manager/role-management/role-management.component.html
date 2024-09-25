@@ -1,0 +1,163 @@
+<div class="wrapper app-content flex-column-fluid">
+  <div class="app-container container-fluid">
+    <div class="card">
+      <div class="card-body">
+        <div class="py-4">
+          <h5>Role Management</h5>
+
+          <div class="d-flex justify-content-end py-4" data-kt-user-table-toolbar="base">
+            <button type="button" class="btn btn-light-primary me-3" (click)="onDeleteMulRole()">
+              <i class="ki-duotone ki-exit-up fs-2">
+                <span class="path1"></span>
+                <span class="path2"></span> </i
+              >Delete
+            </button>
+            <button
+              type="button"
+              class="btn btn-primary"
+              data-bs-toggle="modal"
+              data-bs-target="#kt_modal_add_user"
+              (click)="openModalCreateUpdateRole()"
+            >
+              <i class="ki-duotone ki-plus fs-2"></i>Add Role
+            </button>
+          </div>
+
+          <div class="overflow-auto mw-100">
+            <table class="table align-middle table-row-dashed fs-6 gy-5" id="kt_customers_table">
+              <thead>
+                <tr class="text-start text-gray-400 fw-bold fs-7 text-uppercase gs-0">
+                  <th class="w-10px pe-2">
+                    <div class="form-check form-check-sm form-check-custom form-check-solid me-3">
+                      <input
+                        class="form-check-input"
+                        type="checkbox"
+                        [(ngModel)]="checked"
+                        (ngModelChange)="onAllChecked($event)"
+                      />
+                    </div>
+                  </th>
+                  <th class="min-w-125px">id</th>
+                  <th class="min-w-125px">name</th>
+                  <th class="min-w-125px">originalPrice</th>
+                  <th class="min-w-125px">salePrice</th>
+                  <th class="min-w-125px">shortDescription</th>
+                  <th class="min-w-125px">isFreeShip</th>
+                  <th class="min-w-125px">createdAt</th>
+                  <th class="text-center min-w-100px action">Actions</th>
+                </tr>
+              </thead>
+              <tbody class="text-gray-600 fw-semibold">
+                <tr *ngIf="listUsers.length > 0">
+                  <td></td>
+                  <ng-container *ngFor="let column of listColumns; let i = index">
+                    <td *ngIf="column.visible">
+                      <div class="d-flex align-items-center position-relative my-1">
+                        <i class="bi bi-search fs-5 position-absolute"></i>
+                        <input
+                          type="text"
+                          trim="blur"
+                          data-kt-customer-table-filter="search"
+                          class="form-control form-control-solid ps-13"
+                          [(ngModel)]="column.searchValue"
+                          (ngModelChange)="search(column)"
+                        />
+                      </div>
+                    </td>
+                  </ng-container>
+                  <td class="action"></td>
+                </tr>
+
+                <tr *ngFor="let item of listUsers; let i = index">
+                  <td>
+                    <div class="form-check form-check-sm form-check-custom form-check-solid">
+                      <input
+                        class="form-check-input"
+                        type="checkbox"
+                        [ngModel]="setOfCheckedId.has(item?.id)"
+                        (ngModelChange)="onItemChecked(item?.id, $event)"
+                      />
+                    </div>
+                  </td>
+                  <td>{{ item.id }}</td>
+                  <td>{{ item.name }}</td>
+                  <td>{{ item.originalPrice }}</td>
+                  <td>{{ item.salePrice }}</td>
+                  <td class="truncate">{{ item.shortDescription }}</td>
+                  <td class="text-center">{{ item.isFreeShip }}</td>
+                  <td>{{ item.createdAt | date : 'dd/MM/yyyy HH:mm:ss' }}</td>
+                  <td class="action">
+                    <div class="d-flex">
+                      <a
+                        class="btn btn-light btn-active-light-primary btn-flex btn-center btn-sm me-3"
+                        data-kt-menu-trigger="click"
+                        data-kt-menu-placement="bottom-end"
+                        (click)="openModalCreateUpdateRole(item?.id)"
+                      >
+                        <i class="bi bi-pencil-fill"></i>
+                      </a>
+
+                      <a
+                        class="btn btn-light btn-active-light-primary btn-flex btn-center btn-sm me-3"
+                        data-kt-menu-trigger="click"
+                        data-kt-menu-placement="bottom-end"
+                        (click)="onDelete(item)"
+                      >
+                        <i class="bi bi-trash-fill"></i>
+                      </a>
+
+                      <a
+                        class="btn btn-light btn-active-light-primary btn-flex btn-center btn-sm me-3"
+                        data-kt-menu-trigger="click"
+                        data-kt-menu-placement="bottom-end"
+                        (click)="onAssignPermissions()"
+                      >
+                        <i class="bi bi-person-check"></i>
+                      </a>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <ng-container *ngIf="this.listUsers.length == 0">
+            <div class="no-container">
+              <h5>Không có dữ liệu</h5>
+            </div>
+          </ng-container>
+
+          <app-pagination
+            *ngIf="listUsers.length"
+            [page]="pagination.pageIndex"
+            [pageSize]="pagination.pageSize"
+            [collectionSize]="pagination.total"
+            (pageChange)="onPageChange($event)"
+            (pageSizeChange)="pageChangeEvent($event)"
+          >
+          </app-pagination>
+
+          <!-- <div class="table">
+            <app-primary-table
+              [columns]="columns"
+              [listData]="listUsers"
+              [setCheckedId]="'true'"
+              (selectedIds)="handleSelectedIds($event)"
+              [pagination]="pagination"
+            ></app-primary-table>
+
+            <app-pagination
+              *ngIf="listUsers.length"
+              [page]="pagination.pageIndex"
+              [pageSize]="pagination.pageSize"
+              [collectionSize]="pagination.total"
+              (pageChange)="onPageChange($event)"
+              (pageSizeChange)="pageChangeEvent($event)"
+            >
+            </app-pagination>
+          </div> -->
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

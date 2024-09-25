@@ -1,0 +1,92 @@
+
+
+@import './assets/styles/global.scss';
+@import "~@ng-select/ng-select/themes/default.theme.css";
+@import 'metismenujs/style';
+
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+
+// ---Dialog---
+.modal-body {
+  max-height: 70vh;
+  overflow-y: auto;
+}
+
+.modal-header h2{
+  font-size: 1.5rem;
+}
+
+.btn-danger-submit{
+  background: #f1416c !important;
+  padding: calc(0.775rem + 1px) calc(1.5rem + 1px);
+  color: #FFFFFF !important;
+  opacity: 0.8;
+}
+.btn-danger-submit:hover{
+  opacity: 1;
+}
+
+div:where(.swal2-container) button:where(.swal2-styled).swal2-cancel {
+  background-color: initial !important;
+  color: #000000 !important;
+}
+
+.btn-active-light-primary{
+  background: #e5e5e5 !important;
+  background-color: initial;
+  color: #000000;
+}
+
+button.swal2-cancel.btn.fw-bold.btn-active-light-primary.swal2-styled:hover{
+  background: #e5e5e5 !important;
+}
+
+.btn-common {
+  border-radius: 6px;
+  border: none;
+  color: #fff;
+  min-width: 100px;
+}
+
+// Custom table, validate, input
+//-----table----
+td.action:last-child, th.action:last-child {
+  position: sticky;
+  position: sticky;
+  right: 0;
+  background-color: #fff !important;
+  // box-shadow: inset 0 0 0 6px #eee !important;
+}
+
+.column {
+  max-width: 350px;
+}
+
+.truncate {
+  max-width: 250px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+
+//----Input---
+.input-error {
+  border: #de0344ee 1px solid !important;
+}
+
+.ng-select.ng-select-single .ng-select-container {
+  height: 36px;
+  background: #F4F4F4 !important;
+  border-color: #F4F4F4;
+}
+
+input.form-control.form-date-picker {
+  background: #F4F4F4 !important;
+  border: #F4F4F4;
+}

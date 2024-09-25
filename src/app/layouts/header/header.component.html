@@ -1,0 +1,28 @@
+<div class="header-right me-8 d-flex">
+  <div class="language">
+    <app-language></app-language>
+  </div>
+
+  <div class="dropdown d-none d-lg-inline-block ms-1" ngbDropdown>
+    <button type="button" class="btn header-item noti-icon" ngbDropdownToggle>
+      <span class="avatar-name">{{ userInfo?.userName }}</span>
+    </button>
+    <div class="dropdown-menu dropdown-menu-lg dropdown-menu-end" ngbDropdownMenu>
+      <div class="px-lg-2">
+        <div class="row no-gutters py-4">
+          <div class="mx-auto my-3">
+            <a class="dropdown-item" routerLink="/contacts/profile"
+              ><i class="bx bx-user font-size-16 align-middle me-1"></i> Profile
+            </a>
+          </div>
+          <div class="my-3">
+            <a class="dropdown-item" routerLink="/contacts/profile" (click)="logout()"
+              ><i class="bx bx-power-off font-size-16 align-middle me-1 text-danger"></i>
+              Logout
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

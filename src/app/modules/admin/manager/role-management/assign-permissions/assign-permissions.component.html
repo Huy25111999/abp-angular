@@ -1,0 +1,96 @@
+<div class="modal-container">
+  <div class="modal-header">
+    <h2 class="fw-bold">{{ dialogData?.title }}</h2>
+    <div class="btn btn-icon btn-sm btn-active-icon-primary">
+      <button
+        type="button"
+        class="btn-close"
+        data-bs-dismiss="modal-Add"
+        aria-label="Close"
+        (click)="closeModal()"
+      ></button>
+    </div>
+  </div>
+  <div class="modal-body py-10 px-lg-17">
+    <form class="form" [formGroup]="formData" skipValidation>
+      <div class="me-n7 pe-7" data-kt-scroll="true">
+        <div class="fv-row mb-7">
+          <label class="required fs-6 fw-semibold mb-2">Role Name</label>
+          <input
+            type="text"
+            class="form-control form-control-solid"
+            placeholder=""
+            name="name"
+            maxlength="200"
+            trim
+            formControlName="roleName"
+            [ngClass]="{
+              'input-error': f.roleName.invalid && (f.roleName.dirty || f.roleName.touched)
+            }"
+          />
+          <app-error-messages
+            [control]="formData.controls['roleName']"
+            [controlName]="'Role Name' | abpLocalization"
+          ></app-error-messages>
+        </div>
+
+        <div class="fv-row mb-7">
+          <label class="fs-6 fw-semibold mb-2">
+            <span class="required">Assign Permissions</span>
+          </label>
+          <!-- <app-primary-table
+            [columns]="columns"
+            [listData]="listUsers"
+            [setCheckedId]="'true'"
+            (selectedIds)="handleSelectedIds($event)"
+          ></app-primary-table> -->
+        </div>
+      </div>
+    </form>
+    <table class="table align-middle table-row-dashed fs-6 gy-5">
+      <thead>
+        <tr class="text-start text-gray-400 fw-bold fs-7 text-uppercase gs-0">
+          <th>Function</th>
+          <th>Features</th>
+        </tr>
+      </thead>
+      <tbody class="text-gray-600 fw-semibold">
+        <ng-container *ngFor="let role of listRoles; let i = index">
+          <tr *ngFor="let feature of role.features; let first = first; let last = last">
+            <td *ngIf="first" [attr.rowspan]="role.features.length">
+              <div class="form-check form-check-sm form-check-custom form-check-solid">
+                <input
+                  class="form-check-input me-3"
+                  type="checkbox"
+                  [(ngModel)]="role.functionChecked"
+                  (change)="onFunctionChecked(role, $event.target.checked)"
+                />
+                {{ role.function }}
+              </div>
+            </td>
+            <td class="ps-3">
+              <div class="form-check form-check-sm form-check-custom form-check-solid">
+                <input
+                  class="form-check-input me-3"
+                  type="checkbox"
+                  [checked]="role.checkedFeatures.includes(feature)"
+                  (change)="onFeatureChecked(role, feature, $event.target.checked)"
+                />
+                {{ feature }}
+              </div>
+            </td>
+          </tr>
+        </ng-container>
+      </tbody>
+    </table>
+  </div>
+  <div class="modal-footer flex-center">
+    <button type="reset" class="btn btn-light me-3">Reset</button>
+    <button type="submit" class="btn btn-primary">
+      <span class="indicator-label" (click)="onSave($event)">Submit</span>
+      <span class="indicator-progress"
+        >Please wait... <span class="spinner-border spinner-border-sm align-middle ms-2"></span
+      ></span>
+    </button>
+  </div>
+</div>

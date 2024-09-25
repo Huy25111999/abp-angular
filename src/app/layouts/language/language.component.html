@@ -1,0 +1,20 @@
+<div class="dropdown d-inline-block" ngbDropdown>
+  <button type="button" class="btn header-item" id="page-header-user-dropdown" ngbDropdownToggle>
+    <span class="ms-1">{{ selectedLangCulture | uppercase }}</span>
+  </button>
+  <div
+    class="dropdown-menu dropdown-menu-end"
+    ngbDropdownMenu
+    style="max-height: 300px; overflow-y: auto"
+  >
+    <a
+      href="javascript:void(0);"
+      class="dropdown-item notify-item"
+      *ngFor="let item of languages$ | async"
+      (click)="onChangeLang(item.cultureName)"
+      [ngClass]="{ active: cookieValue === item.lang }"
+    >
+      <span class="align-middle">{{ item?.displayName }}</span>
+    </a>
+  </div>
+</div>

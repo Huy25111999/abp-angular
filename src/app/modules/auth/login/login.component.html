@@ -1,0 +1,87 @@
+<div class="wrap">
+  <div class="box mx-auto">
+    <div class="image">
+      <img src="./assets/images/logo/banner-logo.png" alt="Baner" />
+    </div>
+    <div class="form">
+      <div class="logo">
+        <img
+          routerLink="/landing-page"
+          style="cursor: pointer"
+          src="/assets/images/logo/logo.jpg"
+          alt="inspol"
+        />
+      </div>
+
+      <ng-container *ngIf="!isGetCode; else templateCode">
+        <h2 class="large-title text-center mt-20">
+          {{ 'Login' }}
+        </h2>
+        <form
+          (ngSubmit)="onSubmit($event)"
+          [formGroup]="formData"
+          class="form"
+          nzLayout="vertical"
+          skipValidation
+        >
+          <div class="me-n7 pe-7" data-kt-scroll="true">
+            <div class="fv-row mb-7">
+              <label class="required fs-6 fw-semibold mb-2">UserID</label>
+              <input
+                type="text"
+                formControlName="userName"
+                class="form-control form-control-solid"
+                placeholder="Type your UserID"
+                name="userName"
+              />
+              <app-error-messages
+                [control]="formData.controls['userName']"
+                controlName="Tên đăng nhập"
+              >
+              </app-error-messages>
+            </div>
+            <div class="fv-row mb-7">
+              <label class="fs-6 fw-semibold mb-2">
+                <span class="required">Password</span>
+              </label>
+              <input
+                type="password"
+                formControlName="password"
+                class="form-control form-control-solid"
+                placeholder="Type your password"
+                name="password"
+              />
+              <app-error-messages
+                [control]="formData.controls['password']"
+                controlName="Mật khẩu"
+              ></app-error-messages>
+            </div>
+          </div>
+
+          <button
+            type="submit"
+            class="btn btn-primary title btn-common mx-auto d-flex justify-content-center"
+          >
+            Login
+          </button>
+          <div class="row mt-2">
+            <div class="col-md-6">
+              <label nz-checkbox class="title" (click)="openModalResetPassword()">
+                <h5>{{ 'Forgot Password' }}</h5>
+              </label>
+            </div>
+            <div class="col-md-6" style="text-align: right">
+              <h5 class="forgot_password title" (click)="openModalContactSupport()">
+                {{ 'Account Support' }}
+              </h5>
+            </div>
+          </div>
+        </form>
+      </ng-container>
+
+      <ng-template #templateCode>
+        <app-verifyle [dataform]="getFormValue"></app-verifyle>
+      </ng-template>
+    </div>
+  </div>
+</div>

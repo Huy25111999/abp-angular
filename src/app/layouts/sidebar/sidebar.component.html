@@ -1,0 +1,76 @@
+<ul class="nav-links">
+  <li
+    *ngFor="let menuItem of menuItems"
+    [ngClass]="{
+    'menu-item-hover': currentRoute === menuItem.link,
+    'active': currentRoute === menuItem.link,
+  }"
+  >
+    <a href="" *ngIf="!hasItems(menuItem)" [routerLink]="menuItem.link">
+      <i
+        class="bi truncateLabel oi {{ menuItem.icon }}"
+        style="font-size: 30px; margin-right: 16px"
+      ></i>
+      <span class="link_name">{{ menuItem.label }}</span>
+    </a>
+
+    <ng-container *ngIf="hasItems(menuItem)">
+      <div class="iocn-link">
+        <a>
+          <i class="bx bx-collection"></i>
+          <span class="link_name">{{ menuItem.label }}</span>
+        </a>
+        <i class="bx bxs-chevron-down arrow"></i>
+      </div>
+    </ng-container>
+
+    <ul *ngIf="hasItems(menuItem)" class="sub-menu">
+      <li
+        *ngFor="let subitem of menuItem.subItems"
+        class="menu-12"
+        [ngClass]="{
+        'menu-item-hover': currentRoute === menuItem.link,
+        'active': currentRoute === menuItem.link,
+      }"
+      >
+        <a
+          href=""
+          *ngIf="!hasItems(subitem)"
+          [routerLink]="subitem.link"
+          [attr.data-parent]="subitem.parentId"
+          [ngClass]="{ 'menu-item-hover': currentRoute === subitem.link }"
+        >
+          <i class="bi truncateLabel oi {{ subitem.icon }}"></i>
+          <span class="link_name">{{ subitem.label }}</span>
+        </a>
+
+        <a
+          *ngIf="hasItems(subitem)"
+          class="side-nav-link-a-ref has-arrow truncateSubItem"
+          href="javascript:void(0);"
+          ngbTooltip="{{ subitem.label }}"
+          placement="right"
+          container="body"
+          [attr.data-parent]="subitem.parentId"
+        >
+          {{ subitem.label }}---2
+        </a>
+        <!-- <ul *ngIf="hasItems(subitem)" class="sub-menu mm-collapse" aria-expanded="false">
+          <li *ngFor="let subSubitem of subitem.subItems">
+            <a
+              [attr.data-parent]="subSubitem.parentId"
+              [routerLink]="subSubitem.link"
+              routerLinkActive="active"
+              ngbTooltip="{{ subSubitem.label }}"
+              placement="right"
+              container="body"
+              class="side-nav-link-ref truncateSubItem"
+            >
+              {{ subSubitem.label }}
+            </a>
+          </li>
+        </ul> -->
+      </li>
+    </ul>
+  </li>
+</ul>
